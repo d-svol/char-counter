@@ -8,22 +8,18 @@ public class PrettyPrinter implements DivideOperationPrinter{
 
     @Override
     public String print(Logic logic) {
+        StringBuilder result = new StringBuilder();
         String text = logic.getText();
-        Optional<Map<Character, Integer>> charCountMapOptional = logic.getWordFromCache(text);
+        Map<Character, Integer> charCountMapOptional = logic.getCharacterCountsFromCache(text);
 
-        if (charCountMapOptional.isPresent()) {
-            Map<Character, Integer> charCountMap = charCountMapOptional.get();
-            StringBuilder result = new StringBuilder();
-            result.append(text).append(NEW_LINE);
+        result.append(text).append(NEW_LINE);
 
-            for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
-                char character = entry.getKey();
-                int count = entry.getValue();
-                result.append(String.format("\"%c\" - %d", character, count)).append(NEW_LINE);
-            }
-            return result.toString();
-        } else {
-            return "Кеш не містить результатів для даного тексту.";
+        for (Map.Entry<Character, Integer> entry : charCountMapOptional.entrySet()) {
+            char character = entry.getKey();
+            int count = entry.getValue();
+            result.append(String.format("\"%c\" - %d", character, count)).append(NEW_LINE);
         }
+        return result.toString();
+
     }
 }

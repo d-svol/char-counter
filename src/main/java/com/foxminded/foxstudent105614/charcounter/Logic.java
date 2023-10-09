@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Logic{
-    private final Map<String, Map<Character, Integer>> cache = new HashMap<>();
+    private final Map<String, Map<Character, Integer>> cache = new Cache();
     private String text;
 
     public void processAndCacheText(String input) {
         if (!cache.containsKey(input)) {
             System.out.println("Adding to cache");
-            Map<Character, Integer> charCountMap = calculateWord(input);
+            Map<Character, Integer> charCountMap = calculateCharacterCounts(input);
             addToCache(input, charCountMap);
             setText(input);
         } else {
@@ -32,7 +32,7 @@ public class Logic{
         cache.put(key, value);
     }
 
-    private Map<Character, Integer> calculateWord(String input) {
+    private Map<Character, Integer> calculateCharacterCounts(String input) {
         Map<Character, Integer> charCountMap = new LinkedHashMap<>();
         for (char c : input.toCharArray()) {
             if (charCountMap.containsKey(c)) {
@@ -44,8 +44,8 @@ public class Logic{
         return charCountMap;
     }
 
-    public Optional<Map<Character, Integer>> getWordFromCache(String input) {
-        return Optional.ofNullable(cache.get(input));
+    public Map<Character, Integer> getCharacterCountsFromCache(String input) {
+        return cache.get(input);
     }
 }
 
