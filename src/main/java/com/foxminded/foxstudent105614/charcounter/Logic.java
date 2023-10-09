@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Logic{
-    private final Map<String, Map<Character, Integer>> cache = new Cache();
+    private final Cache<String, Map<Character, Integer>> cache = new Cache();
     private String text;
 
     public void processAndCacheText(String input) {

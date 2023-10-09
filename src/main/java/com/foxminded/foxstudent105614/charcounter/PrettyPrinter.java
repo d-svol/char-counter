@@ -1,7 +1,6 @@
 package com.foxminded.foxstudent105614.charcounter;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class PrettyPrinter implements DivideOperationPrinter{
     private static final String NEW_LINE = System.lineSeparator();
@@ -20,6 +19,5 @@ public class PrettyPrinter implements DivideOperationPrinter{
             result.append(String.format("\"%c\" - %d", character, count)).append(NEW_LINE);
         }
         return result.toString();
-
     }
 }
