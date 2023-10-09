@@ -6,10 +6,10 @@ public class PrettyPrinter implements DivideOperationPrinter{
     private static final String NEW_LINE = System.lineSeparator();
 
     @Override
-    public String print(Logic logic) {
+    public String print(CharCounter charCounter) {
         StringBuilder result = new StringBuilder();
-        String text = logic.getText();
-        Map<Character, Integer> charCountMapOptional = logic.getCharacterCountsFromCache(text);
+        String text = charCounter.getText();
+        Map<Character, Integer> charCountMapOptional = charCounter.getUniqueCharacterCountsFromCache(text);
 
         result.append(text).append(NEW_LINE);
 

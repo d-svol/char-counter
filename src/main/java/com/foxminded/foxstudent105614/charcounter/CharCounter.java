@@ -1,20 +1,18 @@
 package com.foxminded.foxstudent105614.charcounter;
 
+import com.foxminded.foxstudent105614.charcounter.cache.Cache;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Logic{
-    private final Cache<String, Map<Character, Integer>> cache = new Cache();
+public class CharCounter {
+    private final Cache<String, Map<Character, Integer>> cache = new Cache<>();
     private String text;
 
     public void processAndCacheText(String input) {
         if (!cache.containsKey(input)) {
-            System.out.println("Adding to cache");
             Map<Character, Integer> charCountMap = calculateCharacterCounts(input);
             addToCache(input, charCountMap);
             setText(input);
-        } else {
-            System.out.println("Already in cache");
         }
     }
 
@@ -42,7 +40,7 @@ public class Logic{
         return charCountMap;
     }
 
-    public Map<Character, Integer> getCharacterCountsFromCache(String input) {
+    public Map<Character, Integer> getUniqueCharacterCountsFromCache(String input) {
         return cache.get(input);
     }
 }

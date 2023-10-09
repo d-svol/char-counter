@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-        Logic logic = new Logic();
+        CharCounter charCounter = new CharCounter();
         PrettyPrinter printer = new PrettyPrinter();
 
         try (Scanner scanner = new Scanner(System.in)) {
@@ -14,8 +14,8 @@ public class Main {
             text = scanner.nextLine();
             while (!text.equals("ex")) {
                 if (!text.trim().isEmpty()) {
-                    logic.processAndCacheText(text);
-                    System.out.println(printer.print(logic));
+                    charCounter.processAndCacheText(text);
+                    System.out.println(printer.print(charCounter));
                 } else {
                     System.out.println("Text cannot be empty.");
                 }
