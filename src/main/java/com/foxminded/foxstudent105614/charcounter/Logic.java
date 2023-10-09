@@ -1,9 +1,7 @@
 package com.foxminded.foxstudent105614.charcounter;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class Logic{
     private final Cache<String, Map<Character, Integer>> cache = new Cache();
