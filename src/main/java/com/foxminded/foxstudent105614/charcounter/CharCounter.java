@@ -10,9 +10,9 @@ public class CharCounter {
 
     public void processAndCacheText(String input) {
         if (!cache.containsKey(input)) {
+            setText(input);
             Map<Character, Integer> charCountMap = calculateCharacterCounts(input);
             addToCache(input, charCountMap);
-            setText(input);
         }
     }
 

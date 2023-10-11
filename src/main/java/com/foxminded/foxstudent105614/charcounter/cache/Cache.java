@@ -1,14 +1,17 @@
 package com.foxminded.foxstudent105614.charcounter.cache;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Objects;
 
-public class Cache<K, V> extends HashMap<K, V> {
+public class Cache<K, V> extends HashMap<K, V>  {
+    private static final int DEFAULT_MAX_SIZE = 100;
+    private final LinkedList<Serializable> keys;
     private final int maxSize;
-    private final LinkedList<K> keys;
 
     public Cache() {
-        this(100);
+        this(DEFAULT_MAX_SIZE);
     }
 
     public Cache(int maxSize) {
@@ -19,13 +22,31 @@ public class Cache<K, V> extends HashMap<K, V> {
 
     @Override
     public V put(K key, V value) {
+        if (key == null || value == null) {
+            throw new NullPointerException("Key and value can't by null.");
+        }
         if (size() >= maxSize) {
-            K oldestKey = keys.poll();
+            Serializable oldestKey = keys.poll();
             if (oldestKey != null) {
                 remove(oldestKey);
             }
         }
-        keys.offer(key);
+        keys.offer((Serializable) key);
         return super.put(key, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(keys, super.hashCode());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cache<?, ?> cache = (Cache<?, ?>) o;
+        if (maxSize != cache.maxSize) return false;
+        return keys.equals(cache.keys);
     }
 }
